@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    New page
+{% endblock %}
+
+{{% block body %}
+    {% if Entry_exists %}
+        <h1>ERROR: Encyclopedia entry already exists!</h1>
+    {% else %}
+        <h2>Create a new Encyclopedia Entry</h2>
+        <form action="{% url 'new_page' %}" id="new_page_form" method="post">
+            {% csrf_token %}
+            Insert Title: <input type="textarea" name="title">
+        </form>
+        <textarea name="markdown_content" form="new_page_form" placeholder="Insert your Markdown text" 
+        style="height: 250px; margin-top: 15px; margin-bottom: 12px;"></textarea>
+        <div><input class="btn btn-success" type="submit" form="new_page_form" value="Save"></div>
+    {% endif %}
+{% endblock %}}
